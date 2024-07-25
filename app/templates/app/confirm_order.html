@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+			<!-- /.End of navbar -->
+{% block content %}
+			<div class="py-5">
+				<div class="container py-3">
+					<div class="row justify-content-center">
+						<div class="col-lg-10 col-xl-7 text-center">
+							<!-- Start Svg Icon -->
+							<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-success mb-4">
+								<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+								<polyline points="22 4 12 14.01 9 11.01"></polyline>
+							</svg>
+							<!-- /.End Svg Icon -->
+							<div class="mb-4">
+								<h2 class="">Спасибо вам за ваш заказ!</h2>
+								<p class="fs-15 mb-1">Ваш заказ размещен и будет обработан в кратчайшие сроки.</p>
+								<p class="fs-15 mb-1">Убедитесь, что вы указали номер вашего заказа, который является <strong>34VB5540K83.</strong> </p>
+								<p class="fs-15 mb-0">Вскоре вы получите электронное письмо с подтверждением вашего заказа. <u>Вы
+									теперь можно:</u></p>
+							</div>
+							<!-- Start Button -->
+							<!-- /.End Button -->
+							<!-- Start Button -->
+							<a href="{% url 'app:goods_list' %}" class="btn btn-primary ms-2 mt-2">Возвращайся за покупками<i class="fa-arrow-right fa-solid fs-14 ms-2"></i></a>
+							<!-- /.End Button -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Start Footer -->
+{% endblock %}

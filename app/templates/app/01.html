@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запишитесь на прием онлайн</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f7fc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px;
+        }
+        .header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .header p {
+            color: #777;
+            margin: 5px 0 20px;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 65%;
+        }
+        .form h2 {
+            font-size: 18px;
+            margin: 0 0 20px;
+        }
+        .form .step-back {
+            color: #3d6a9a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .form .step-back:hover {
+            text-decoration: underline;
+        }
+        .form .options {
+            display: flex;
+            flex-direction: column;
+        }
+        .form .options div {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .form .options div:hover {
+            border-color: #007bff;
+        }
+        .profile {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(195, 109, 109, 0.1);
+            padding: 20px;
+            width: 30%;
+            text-align: left;
+        }
+        .profile h3 {
+            font-size: 16px;
+            margin: 0 0 5px;
+        }
+        .profile p {
+            color: #777;
+            margin: 5px 0;
+        }
+        .profile ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+        }
+        .profile ul li {
+            padding-left: 20px;
+            text-indent: -20px;
+        }
+        .profile ul li:before {
+            content: '✓';
+            color: #007bff;
+            margin-right: 5px;
+        }
+        .appointment-dates {
+            margin-top: 20px;
+        }
+        .appointment-dates h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .date-options {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-color: #007bff;
+        }
+        .time-slots {
+            display: none;
+            flex-wrap: wrap;
+            padding-top: 10px;
+        }
+        .time-slots div {
+            background-color: #fff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .time-slots div:hover {
+            background-color: #b6caf9;
+        }
+        .time-slots div.selected {
+            background-color: #4d62f9;
+            color: #fff;
+        }
+        .load-more {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #1b6cbd;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .load-more:hover {
+            background-color: #0056b3;
+        }
+        .arrow {
+            transition: transform 0.3s;
+            color: #5b95d3;
+        }
+        .arrow.down {
+            transform: rotate(0deg);
+        }
+        .arrow.up {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<a href="index.html" class="align-items-center btn btn-home btn-primary d-flex justify-content-center p-0 position-absolute" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Back To Home"><i class="fa-solid fa-house"></i></a>
+
+<body>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Запишитесь на прием онлайн</h1>
+            <p>Заполните следующую информацию</p>
+        </div>
+        <div class="content">
+            <div class="form">
+                <div class="step-back">
+                    <span>&larr;</span>
+                    <span style="margin-left: 5px;">Предыдущий шаг</span>
+                </div>
+                <h2>Выберите дату консультации</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="selectedDateInput" name="selected_date">
+                    <input type="hidden" id="selectedTimeInput" name="selected_time">
+                    <div class="appointment-dates">
+                        {% for slot in available_slots %}
+                        <div class="date-options" onclick="toggleSlots('slots-{{ forloop.counter }}', 'arrow-{{ forloop.counter }}')">
+                            <h3>{{ slot.date|date:"l, d F" }}</h3>
+                            <span id="arrow-{{ forloop.counter }}" class="arrow down"></span>
+                            <div id="slots-{{ forloop.counter }}" class="time-slots">
+                                {% for time_slot in slot.time_slots.all|dictsort:"time" %}
+                                {% if not time_slot.is_booked %}
+                                <div onclick="selectSlot('{{ slot.id }}', '{{ time_slot.time }}', 'slots-{{ forloop.parentloop.counter }}', 'arrow-{{ forloop.parentloop.counter }}')">
+                                    <span>{{ time_slot.time|time:"H:i" }}</span>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="load-more">ПОКАЗАТЬ БОЛЬШЕ НАЛИЧИЯ</button>
+                </form>
+            </div>
+            <div class="profile">
+                <img src="{% static 'your-image-url.jpg'%}" alt="Д-р Беатрис Ле Жуан-Гайак" style="width: 100%; border-radius: 50%;">
+                <h3>Д-р Беатрис Ле Жуан-Гайак</h3>
+                <p>Ревматолог</p>
+                <ul>
+                    <li>Говорит на английском, русском, французском</li>
+                    <li>Говорит на русском</li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            function toggleSlots(slotsId, arrowId) {
+                const slots = document.getElementById(slotsId);
+                const arrow = document.getElementById(arrowId);
+                if (slots.style.display === "none" || slots.style.display === "") {
+                    slots.style.display = "flex";
+                    arrow.classList.remove("down");
+                    arrow.classList.add("up");
+                } else {
+                    slots.style.display = "none";
+                    arrow.classList.remove("up");
+                    arrow.classList.add("down");
+                }
+            }
+    
+            function selectSlot(slotId, time, slotsId, arrowId) {
+                // Remove the selected class from all slots
+                const slotsContainer = document.getElementById(slotsId);
+                const slots = slotsContainer.children;
+                for (let slot of slots) {
+                    slot.classList.remove("selected");
+                }
+                // Add the selected class to the clicked slot
+                const selectedSlot = event.currentTarget;
+                selectedSlot.classList.add("selected");
+    
+                // Update hidden input fields
+                document.getElementById('selectedDateInput').value = slotId;
+                document.getElementById('selectedTimeInput').value = time;
+    
+                // Close the slots menu
+                slotsContainer.style.display = "none";
+                const arrow = document.getElementById(arrowId);
+                arrow.classList.remove("up");
+                arrow.classList.add("down");
+            }
+        </script>
+</body>
+</html>

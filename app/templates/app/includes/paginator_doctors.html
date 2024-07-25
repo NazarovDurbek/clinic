@@ -1,0 +1,24 @@
+{% load static %}
+{% load apptags %}
+<nav class="align-items-center border-top d-flex flex-wrap justify-content-center justify-content-sm-between pagination mt-5">
+    <ul class="list-unstyled m-0 pages mt-3">
+        {% for page in doctors.paginator.page_range %}
+        {% if page >= doctors.number|add:-2 and page <= doctors.number|add:2 %}
+        <li {% if doctors.number == page %} class="active" {% endif %}><a class="page-link" href="?{% change_params page=page %}">{{ page }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if  doctors.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?{% change_params page=doctors.next_page_number %}"></a>
+        </li>
+        {% endif %}
+    </ul>
+    {% if  doctors.has_next %}
+    <div class="ms-3 ms-sm-0 mt-3"><a class="btn btn-primary btn-sm" href="?{% change_params page=doctors.next_page_number %}">Следующий<i class="fa-solid fa-arrow-right ms-2"></i></a></div>
+    {% endif %}
+</nav>
+
+
+
+
+

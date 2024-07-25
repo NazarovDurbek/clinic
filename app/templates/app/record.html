@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% block content %}
+{% load static %}
+	<div class="py-5">
+		<div class="container py-3">
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-lg-8 pe-xl-5 content">
+					<!-- Start collapse Toggle -->
+
+					<!-- /.End collapse Toggle -->
+					<!-- Start Collapse -->
+					<div class="collapse" id="returning">
+						<div class="card rounded-4">
+							<div class="card-body p-4">
+								<p class="mb-4">Если вы уже совершали покупки у нас ранее, пожалуйста, введите свои данные ниже. Если вы новый клиент, пожалуйста, перейдите в раздел выставления счетов.</p>
+								<div class="row g-4">
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Имя пользователя или адрес электронной почты</label>
+											<input type="email" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Пароль</label>
+											<input type="email" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+								</div>
+								<!-- Start Checkbox -->
+								<div class="form-check mt-4">
+									<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+									<label class="form-check-label text-dark" for="flexCheckDefault"> Помни меня <a href="#">Потеряли свой пароль?</a> </label>
+								</div>
+								<!-- /.End Checkbox -->
+								<!-- Start Button -->
+								<button type="button" class="btn btn-primary btn-lg mt-2">Авторизоваться<i class="fa-solid fa-arrow-right-to-bracket fs-14 ms-2"></i></button>
+								<!-- /.End Button -->
+							</div>
+						</div>
+					</div>
+					<!-- /.End Collapse -->
+					<!-- Start collapse Toggle -->
+
+					<!-- /.End collapse Toggle -->
+					<!-- Start Collapse -->
+					<div class="collapse" id="collapseCoupon">
+						<div class="card rounded-4">
+							<div class="card-body p-4">
+								<p class="mb-4">Если у вас есть код купона, пожалуйста, примените его ниже.</p>
+								<form class="row g-2">
+									<div class="col-auto">
+										<label for="coupon" class="visually-hidden">Купон</label>
+										<input type="text" class="form-control" id="coupon"> </div>
+									<div class="col-auto">
+										<button type="submit" class="btn btn-primary">Применить купон</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- /.End Collapse -->
+					<!-- Start Title -->
+					<div class="h3 align-items-center d-flex fs-21 fw-bold l-spacing-1 my-5 text-uppercase"> <span>Данные пациента</span>
+						<hr class="m-0 flex-grow-1 ms-2"> </div>
+					<!-- /.End Title -->
+					<form method="post" >
+						{% csrf_token %}
+					<div class="row g-4">
+						<div class="col-sm-6">
+							<!-- Start Form Group -->
+							<div class="form-group">
+								<label class="required">Имя и фамилия</label>
+								{{form.full_name}}</div>
+							<!-- /.End Form Group -->
+						</div>
+
+						<div class="col-12">
+							<!-- Start Form Group (Select) -->
+							<div class="form-group">
+								<label class="required">Страна/Регион</label>
+								{% get_cities as cities %}
+								<select name="receiver_city" class="form-select">
+									{% for city in cities %}
+									<option value="{{city.id}}" selected="selected">{{city.name}}</option>
+								{% endfor %}
+								</select>
+							</div>
+							<!-- /.End Form Group (Select) -->
+						</div>
+
+
+						<div class="col-sm-6">
+							<!-- Start Form Group -->
+							<div class="form-group">
+								<label class="required">Дата рождения </label>
+								{{form.birthday}} </div>
+							<!-- /.End Form Group -->
+						</div>
+
+						<div class="col-sm-6">
+							<!-- Start Form Group -->
+							<div class="form-group">
+								<label class="required">Пол</label>
+								{{form.gender}} </div>
+							<!-- /.End Form Group -->
+						</div>
+
+
+						<div class="col-sm-6">
+							<!-- Start Form Group (Select) -->
+							<div class="col-12">
+								<!-- Start Form Group -->
+								<div class="form-group">
+									<label class="required">Адрес электронной почты</label>
+									{{form.email}} </div>
+								<!-- /.End Form Group -->
+							</div>
+							<!-- /.End Form Group (Select) -->
+						</div>
+
+						<div class="col-sm-6">
+							<!-- Start Form Group -->
+							<div class="form-group">
+								<label class="required">Телефон</label>
+								{{form.phone}} </div>
+							<!-- /.End Form Group -->
+						</div>
+
+						<input type="submit" class="form-control">
+					</form>
+
+						<div class="col-12">
+							<!-- Start Collapse Toggle -->
+
+							<!-- /.End Collapse Toggle -->
+							<!-- Start Collapse -->
+							<div class="collapse" id="collapseSeven">
+								<div class="row g-4 pt-4">
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Имя</label>
+											<input type="text" class="form-control" > </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label>Фамилия <span>*</span></label>
+											<input type="text" class="form-control" > </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-12">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label>Название улицы</label>
+											<input type="text" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-12">
+										<!-- Start Form Group (Select) -->
+										<div class="form-group">
+											<label class="required">Страна/Регион</label>
+											<select name="country" class="form-select">
+												<option value="default" selected="selected">Соединенные Штаты(US)</option>
+												<option value="uk">Объединенное Королевство (UK)</option>
+												<option value="us">Соединенные Штаты</option>
+												<option value="fr">Франция</option>
+												<option value="aus">Австралия</option>
+											</select>
+										</div>
+										<!-- /.End Form Group (Select) -->
+									</div>
+									<div class="col-12">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Адрес улицы</label>
+											<input type="text" id="address3" class="form-control mb-3" placeholder="House number and street name">
+											<input type="text" id="address4" class="form-control" placeholder="Apartment, suite, unit, etc. (optonal)"> </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Населенный пункт / Город</label>
+											<input type="text" class="form-control" > </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group (Select) -->
+										<div class="form-group">
+											<label class="required">Государство</label>
+											<select name="state" class="form-select">
+												<option value="default" selected="selected">Калифорния</option>
+												<option value="uk">Соединенное Королевство (UK)</option>
+												<option value="us">Соединенные Штаты</option>
+												<option value="fr">Франция</option>
+												<option value="aus">Австралия</option>
+											</select>
+										</div>
+										<!-- /.End Form Group (Select) -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">застежка-молния</label>
+											<input type="text" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Телефон</label>
+											<input type="number" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+								</div>
+							</div>
+							<!-- /.End Collapse -->
+						</div>
+						<div class="col-12">
+							<!-- Start Form Group (textarea) -->
+
+							<!-- /.End Form Group (textarea) -->
+						</div>
+					</div>
+				</div>
+				<div class="col-md-5 col-lg-4 sidebar">
+					<!-- Start Card Summary -->
+					<div class="card border-0 shadow rounded-4 card-summary">
+						<div class="card-body p-4 p-md-3 p-lg-4 p-xl-5">
+							<!-- Start Title -->
+							<div class="h4 align-items-center d-flex fs-16 fw-bold l-spacing-1 mb-4 text-uppercase"> <span>Врач</span>
+								<hr class="m-0 flex-grow-1 ms-2"> </div>
+							<!-- /.End Title -->
+							<!-- Start Order Summary  -->
+							<div class="mb-4">
+								<div class="row g-2">
+									<div class="col">
+										<div class="d-flex">
+											<div class="flex-shrink-0"> <img alt="Image placeholder" src="{{slot.doctor.image.url}}" width="56" class="border rounded-3"> </div>
+											<div class="flex-grow-1 ms-3">
+												<h5 class="fs-15 fw-semibold mb-1">{{slot.doctor.name}}</h5>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.End Order Summary  -->
+							<!-- Start Order Total -->
+
+							<!-- /.End Order Total -->
+							<!-- Start Shipping Methods -->
+
+							<!-- /.End Shipping Methods -->
+							<!-- Start Total Order -->
+							<div class="border-bottom border-top fs-18 fw-semibold mb-4 py-3 text-center text-dark">Стоимость услуги: р{{slot.doctor.salary}} </div>
+							<!-- /.End Total Order -->
+							<!-- Start Payment Methods -->
+							<div class="mb-4">
+								<!-- Start Title -->
+								<div class="h4 align-items-center d-flex fs-16 fw-bold l-spacing-1 mb-4 text-uppercase"> <span>Способ оплаты</span>
+									<hr class="m-0 flex-grow-1 ms-2"> </div>
+								<!-- /.End Title -->
+								<!-- Start Accordion -->
+							</div>
+							<!-- /.End Payment Methods -->
+							<!-- Start Button -->
+							<!-- /.End Button -->
+							<!-- Start Link --><a href="product.html" class="d-block fw-semibold mt-3 text-center text-decoration-underline">Возвращайся в
+магазин</a>
+							<!-- /.End Link -->
+						</div>
+					</div>
+					<!-- /.End Card Summary -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Start Footer -->
+{% endblock %}

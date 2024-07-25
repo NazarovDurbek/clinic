@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+	<!-- /.End of navbar -->
+	{% block content %}
+	<div class="py-5">
+		<div class="container pt-4">
+			<div class="row">
+				<div class="col-xl-8 mb-5">
+					<!-- Start Title -->
+					<h1 class="display-4 fw-bold">Давайте <span class="underline position-relative text-primary">соединять</span>и получше узнать друг друга
+                    </h1>
+					<!-- /.End Title -->
+					<!-- Start Short Sescription -->
+					<p class="fs-17">Давно известно, что читатель будет отвлекаться на читаемое содержимое страницы, когда будет смотреть на ее макет. Смысл использования Lorem Ipsum в том, что он имеет</p>
+					<!-- /.End Short Sescription -->
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row g-4 justify-content-center">
+				<div class="col-sm-6 col-lg-4 d-flex">
+					<!-- Start Card -->
+					<div class="card flex-fill shadow-3d w-100">
+						<div class="card-body p-4 text-center">
+							<div class="box-icon"> <i class="fa-headset fa-solid fs-40 mb-4 text-primary"></i> </div>
+							<h5 class="fw-bold">Позвоните нам</h5>
+							<p class="fs-15">Многие настольные издательские пакеты и редакторы веб-страниц теперь используют Lorem.</p>
+							<div class="d-grid gap-2 d-xl-block">
+								<div class="border d-inline-block fw-medium px-3 py-1 rounded text-primary"><i class="fa-solid fa-mobile-button me-2"></i>+123 456 789</div>
+								<div class="border d-inline-block fw-medium px-3 py-1 rounded text-primary"><i class="fa-solid fa-phone me-2"></i>+(222)4567 586</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.End Card -->
+				</div>
+				<div class="col-sm-6 col-lg-4 d-flex">
+					<!-- Start Card -->
+					<div class="card flex-fill shadow-3d w-100">
+						<div class="card-body p-4 text-center">
+							<div class="box-icon"> <i class="fa-envelope-circle-check fa-solid fs-40 mb-4 text-danger"></i> </div>
+							<h5 class="fw-bold">Напишите нам по электронной почте</h5>
+							<p class="fs-15">Существует множество вариаций отрывков из Lorem Ipsum,</p> <a href="/cdn-cgi/l/email-protection#fe98978c8d8ad0929f8d8abe9b869f938e929bd09d9193" class="fs-15 fw-medium text-decoration-underline"><i class="fa-solid fa-envelope me-2"></i><span class="__cf_email__" data-cfemail="87e1eef5f4f3a9ebe6f4f3c7e2ffe6eaf7ebe2a9e4e8ea">[email�&nbsp;защищенный]</span></a> </div>
+					</div>
+					<!-- /.End Card -->
+				</div>
+				<div class="col-sm-6 col-lg-4 d-flex">
+					<!-- Start Card -->
+					<div class="card flex-fill shadow-3d w-100">
+						<div class="card-body p-4 text-center">
+							<div class="box-icon"> <i class="fa-hashtag fa-solid fs-40 mb-4 text-warning"></i> </div>
+							<h5 class="fw-bold">Социальные медиа</h5>
+							<p class="fs-15">С течением времени появились различные версии</p>
+							<!-- Start Social Link -->
+							<div class="d-flex justify-content-center social-links text-md-right"> <a href="#" class="fb d-flex align-items-center justify-content-center fs-17 text-white rounded mr-2"><i class="fab fa-facebook-f"></i></a> <a href="#" class="tw d-flex align-items-center justify-content-center fs-17 text-white rounded mr-2"><i class="fab fa-twitter"></i></a> <a href="#" class="ins d-flex align-items-center justify-content-center fs-17 text-white rounded mr-2"><i class="fab fa-instagram"></i></a> <a href="#" class="pr d-flex align-items-center justify-content-center fs-17 text-white rounded mr-2"><i class="fab fa-pinterest-p"></i></a> <a href="#" class="li d-flex align-items-center justify-content-center fs-17 text-white rounded mr-2"><i class="fab fa-linkedin-in"></i></a> </div>
+							<!-- /.End Social Link -->
+						</div>
+					</div>
+					<!-- /.End Card -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="py-5">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10">
+					<!-- Start Section Header Title -->
+					<div class="section-header text-center mb-5">
+						<!-- Start Section Header title -->
+						<h2 class="fw-semibold mb-2 section-header__title text-capitalize">Дайте нам знать, что вы скажете <span class="underline position-relative text-primary">непосредственно!</span></h2>
+						<!-- /.End Section Header Title -->
+						<!-- Start Section Header Sub Title -->
+						<div class="sub-title fs-16"> Записывайтесь на прием, заказывайте товары для здоровья, Консультируйтесь с врачом онлайн, Заказывайте здоровье
+							<br class="d-none d-lg-block"> проверяйте, храните медицинские записи &amp; читайте советы по охране здоровья. </div>
+						<!-- /.End Section Header Sub Title -->
+					</div>
+					<!--/. End Section Header -->
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="row align-items-center">
+						<div class="col-md-7 pe-xl-5 mb-5 mb-md-0">
+							<!-- Start Illustration Image --><img src="{% static 'images/destination.svg' %}" alt="" class="img-fluid">
+							<!-- /.End Illustration Image -->
+						</div>
+						<div class="col-md-5">
+							<form method="post" action="{% url "app:contact" %}">
+								{% csrf_token %}
+								<!-- Start Form Group -->
+								<div class="form-group mb-4">
+									<label class="required">Полное имя</label>
+									<input name="name" type="text" class="form-control" id="firstName" placeholder=""> </div>
+								<!-- /.End Form Group -->
+								<!-- Start Form Group -->
+								<div class="form-group mb-4">
+									<label class="required">Ваш адрес электронной почты</label>
+									<input name="email" type="email" class="form-control" id="email" placeholder="hello@domain.com"> </div>
+								<!-- /.End Form Group -->
+								<!-- Start Form Group -->
+								<div class="form-group mb-4">
+									<label class="required">Твой телефон</label>
+									<input name="phone" type="number" class="form-control" id="phone"> </div>
+								<!-- /.End Form Group -->
+								<!-- Start Form Group -->
+								<div class="form-group mb-4">
+									<label class="required">Ваши комментарии</label>
+									<textarea name="text" class="form-control" rows="5" placeholder="Расскажите нам, чем мы можем вам помочь!"></textarea>
+								</div>
+								<!-- /.End Form Group -->
+								<!-- Start Submit Button -->
+								<button type="submit" class="btn btn-primary">Отправить сообщение</button>
+								<!-- /.End Submit Button -->
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.End of about section -->
+	<!-- Start Map Content -->
+	<div class="map-content py-5">
+		<div class="container pb-4">
+			<!-- Start Map -->
+			<div id="map" class="border rounded-4"></div>
+			<!-- /.End Map -->
+		</div>
+	</div>
+	<!-- /.End Map Content -->
+	<!-- Start Footer -->
+
+	{% endblock %}
+	{% block script %}
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4iuUg1YDRIBRZ5e-jdssfqDuT9VLiOnY"></script>
+	<script src="{% static 'js/map.active.js' %}"></script>
+	{% endblock %}

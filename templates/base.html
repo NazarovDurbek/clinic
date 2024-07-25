@@ -1,0 +1,286 @@
+{% load static %}
+{% load apptags %}
+<!DOCTYPE html><html lang="en"><head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+	<!-- Bootstrap CSS -->
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
+	<link href="{% static 'css/aos.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/jquery.smartmenus.bootstrap-4.css' %}" rel="stylesheet">
+	<link href="{% static 'css/all.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/flaticon-icon.css' %}" rel="stylesheet">
+	<link href="{% static 'css/themify-icons.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/select2.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/select2-bootstrap-5-theme.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/owl.theme.default.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/ion.rangeSlider.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/raty.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/slick.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/slick-theme.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/magnific-popup.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/style.css' %}" rel="stylesheet">
+	<title>HTML-шаблон списка врачей и консультаций</title>
+</head>
+
+<body>
+	<!-- Page Loader -->
+	<div class="page-loader-wrapper flex-column align-items-center justify-content-center">
+		<div class="loader">
+			<div class="preloader">
+				<div class="spinner-layer pl-green">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+			<p class="fs-12 fw-semibold mb-0 mt-3 text-uppercase">Пожалуйста,подождите...</p>
+		</div>
+	</div>
+	<!-- /.Page Loader -->
+	<!-- Start Topbar -->
+	<div class="topbar d-none d-lg-block py-3">
+		<div class="container">
+				<div class="row align-items-center">
+						<div class="col-md-4 col-lg-3 col-xl-4">
+							<a href="index.html" class="headerLogo"><img src="{% static 'images/logo.png' %}" alt="" height="40"></a>
+						</div>
+						<div class="col-md-8 col-lg-9 col-xl-8 d-none d-md-block">
+								<div class="d-flex justify-content-end">
+										<div class="d-flex align-items-center help-info">
+											<div class="flex-shrink-0 icon">
+												<i class="fa-clock fa-solid fs-30 text-primary"></i>
+											</div>
+											<div class="flex-grow-1 ms-3">
+												<h6 class="fw-bold help-info__title mb-0">ПН - ПТ: с 08:00 до 20:00 вечера</h6>
+														<p class="sub-text mb-0">Суббота и воскресенье - <span class="fw-semibold text-danger">закрытый</span></p>
+											</div>
+										</div>
+										<div class="d-flex align-items-center help-info ms-4">
+											<div class="flex-shrink-0 icon">
+												<i class="fa-solid fa-mobile-button fs-30 text-primary"></i>
+											</div>
+											<div class="flex-grow-1 ms-3">
+												<h6 class="fw-bold help-info__title mb-0">+375 00 000 00 00</h6>
+														<p class="sub-text mb-0">Свяжитесь с Нами Для Получения Помощи</p>
+											</div>
+										</div>
+										<div class="d-flex align-items-center help-info ms-4">
+											<div class="flex-shrink-0 icon">
+												<i class="fa-solid fa-street-view fs-30 text-primary"></i>
+											</div>
+											<div class="flex-grow-1 ms-3">
+												<h6 class="fw-bold help-info__title mb-0">34th Avenue</h6>
+														<p class="sub-text mb-0">Минск</p>
+											</div>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+	<!-- /.End Topbar -->
+	<!-- Start Navbar -->
+	<!-- <nav class="custom-navbar navbar navbar-expand-lg fixed-top""> -->
+	<nav class="custom-navbar navbar navbar-expand-lg sticky-top no-logo">
+		<!-- <nav class="custom-navbar navbar navbar-expand-lg navbar-light sticky-top"> -->
+		<div class="container">
+			<!-- Start Navbar Brand-->
+			<a class="border-end navbar-brand pe-3 pe-sm-4 py-0" href="index.html"> <img class="logo-dark" src="{% static 'images/logo.png' %}" alt=""> <img class="logo-white" src="{% static 'images/logo-white.png' %}" alt=""> </a>
+			<!-- End Navbar Brand-->
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<!-- Start Navbar Collapse Header -->
+				<div class="align-items-center border-bottom d-flex d-lg-none  justify-content-between mb-3 navbar-collapse__header pb-3">
+					<!-- Start Brand Logo For Mobile -->
+					<div class="collapse-brand flex-shrink-0">
+						<a href="index.html"><img src="{% static 'images/logo.png' %}" alt=""></a>
+					</div>
+					<!-- End Brand Logo For Mobile -->
+					<!-- Start Collapse Close Button -->
+					<div class="flex-grow-1 ms-3 text-end">
+						<button type="button" class="bg-transparent border-0 collapse-close p-0 position-relative"><span></span> <span></span></button>
+					</div>
+					<!-- End Collapse Close Button -->
+				</div>
+				<!-- End Navbar Collapse Header -->
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown"> <a class="nav-link" href="{% url 'index' %}" href="#">
+						Главная
+            </a>
+					</li>
+					<li class="nav-item dropdown"> <a class="nav-link" href="{% url 'app:goods_list' %}" href="#">
+						Аптека
+            </a>
+
+		</li>
+		<li class="nav-item dropdown"> <a class="nav-link" href="{% url 'app:hospitals_list' %}" href="#">
+			Больницы
+</a>
+
+					</li>
+					<li class="nav-item dropdown"> <a class="nav-link" href="contact.html" href="#">
+						Новости
+            </a>
+					</li>
+
+					<li class="nav-item"> <a class="nav-link" href="{% url 'app:contact' %}">Контакт</a> </li>
+				</ul>
+			</div>
+			<div class="d-flex ms-lg-5">
+				<!-- Start Navbar Toggler Buton -->
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-text">Меню</span> </button>
+				<!-- End Navbar Toggler Buton -->
+				<!-- Start Cart Button -->
+                {% if user.is_authenticated %}
+				<a href="{% url 'app:basket' %}" class="align-items-center btn cart-button d-none d-xl-flex ms-2 ms-lg-0">
+					 <i class="fa-solid fa-cart-shopping"></i>
+					 <span class="ms-2">Корзина</span>
+					 <span class="align-items-center cart-quantity d-flex fw-bold justify-content-center ms-2 rounded-circle">{{ total_quantity }}</span>
+				</a>
+				<!-- For Mobile -->
+				<a href="cart.html" class="btn btn-primary d-none d-sm-inline-block d-xl-none ms-sm-2"><i class="fa-solid fa-cart-shopping"></i></a>
+				<!-- /End Cart Button -->
+				<!-- Start Login & Signup Button -->
+				<a href="{% url 'users:profile' %}" class="btn btn-primary ms-2 ms-xl-0"><i class="fa-solid fa-arrow-right-to-bracket"></i><span class="ms-2 d-none d-sm-inline-block">Личный кабинет</span> </a>
+                {% else %}
+                <a href="{% url 'users:login' %}" class="btn btn-primary ms-2 ms-xl-0"><i class="fa-solid fa-arrow-right-to-bracket"></i><span class="ms-2 d-none d-sm-inline-block">Вход / Регистрация</span> </a>
+                {% endif %}
+				<!-- End Login & Signup Button -->
+				<!-- Start Color Change Button -->
+				<!-- <div class="d-none d-sm-inline-block ms-1">
+              <button type="button" class="btn btn-primary dark-btn"><i class="fa-solid fa-moon"></i></button>
+              <button type="button" class="btn btn-primary light-btn"><i class="fa-solid fa-lightbulb"></i></button>
+            </div> -->
+				<!-- End Color Change Button -->
+			</div>
+		</div>
+	</nav>
+
+{% block content %}{% endblock %}
+<footer class="main-footer footer-dark pt-5">
+    <div class="container pt-3">
+        <!-- Start Appointment -->
+        <div class="appointment p-3 p-md-5 p-sm-4 rounded-3 text-center bg-img-hero" data-image-src="{% static 'assets/img/pattern.png' %}">
+            <h2 class="h1 fw-bold mb-0 text-capitalize appointment-title">Запишитесь на прием! <a href="appointment.html" class="text-primary underline position-relative">Иди туда<i class="fa-arrow-right fa-solid fs-2 ms-2"></i></a></h2>
+        </div>
+        <!-- /.End Appointment -->
+            <div class="row">
+                    <div class="col-md-6 col-lg-4 col-xl-4 py-5 py-md-5 text-center text-md-start">
+                            <div class="footer-about">
+                                    <ul class="list-unstyled text-sm">
+                                            <li>Понедельник-пятница: <span class="fw-semibold">9.00</span> am - <span class="fw-semibold">8.00</span> pm</li>
+                                            <li>Суббота: <span class="fw-semibold">10.00</span> am - <span class="fw-semibold">6.00</span> pm</li>
+                                    </ul>
+                                    <p>Twitter,  </p>
+                                    <a class="email-link d-block fw-semibold mb-1" href="#"><i class="fa-solid fa-phone me-2"></i><span>(123) 456-7890</span></a>
+                                    <a class="email-link d-block fw-semibold" href="#"><i class="fa-solid fa-envelope me-2"></i><span><span class="__cf_email__" data-cfemail="2f5c5a5f5f405d5b6f6b404c784e434e014c4042">[email�&nbsp;защищенный]</span></span></a>
+                            </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-auto col-xl-2 py-3 py-md-5 d-none d-md-block">
+                            <h3 class="fs-21 fw-bold link-title mb-3 position-relative">О нас</h3>
+                            <ul class="footer-link list-unstyled menu mb-0">
+                                    <li class="mb-2"><a href="#" class="link d-block">О компании </a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Карьеры</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Исследовать</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Отдел новостей</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Investor Relations</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Ответственная переработка отходов</a></li>
+                            </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-auto col-xl-2 py-3 py-md-5 d-none d-md-block">
+                            <h3 class="fs-21 fw-bold link-title mb-3 position-relative">Аптека</h3>
+                            <ul class="footer-link list-unstyled menu mb-0">
+                                <li class="mb-2"><a href="product.html" class="link d-block">Продукт</a></li>
+                                <li class="mb-2"><a href="product-details.html" class="link d-block">Подробная информация о продукте</a></li>
+                                <li class="mb-2"><a href="cart.html" class="link d-block">Корзина покупок</a></li>
+                                <li class="mb-2"><a href="checkout.html" class="link d-block">Проверка</a></li>
+                                <li class="mb-2"><a href="checkout-complete.html" class="link d-block">Оформление заказа завершено</a></li>
+                                <li class="mb-2"><a href="order-completed.html" class="link d-block">Полный порядок</a></li>
+                                <li class="mb-2"><a href="empty-cart.html" class="link d-block">Тележка пустая</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 py-3 py-md-5 d-none d-md-block d-lg-none d-xl-block">
+                            <h3 class="fs-21 fw-bold link-title mb-3 position-relative">Забота о клиентах</h3>
+                            <ul class="footer-link list-unstyled menu mb-0">
+                                    <li class="mb-2"><a href="#" class="link d-block">Мой аккаунт</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Отслеживание заказов</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block"> Cписок пожеланий</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Обслуживание клиентов</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Возврат / Обмен</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Часто задаваемые вопросы</a></li>
+                                    <li class="mb-2"><a href="#" class="link d-block">Техническая Поддержка</a></li>
+                            </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 py-3 py-md-5 d-none d-md-block">
+                            <h3 class="fs-21 fw-bold link-title mb-3 position-relative">Свяжитесь с нами</h3>
+                            <ul class="list-unstyled social-icon">
+                                    <li><a href="#"><div class="icon-wrap fs-19 d-inline-block bg-primary text-white text-center inst"><i class="fab fa-instagram"></i></div>Instagram</a></li>
+                                    <li><a href="#"><div class="icon-wrap fs-19 d-inline-block bg-primary text-white text-center twi"><i class="fab fa-twitter"></i></div>Twitter</a></li>
+                                    <li><a href="#"><div class="icon-wrap fs-19 d-inline-block bg-primary text-white text-center dri"><i class="fab fa-dribbble"></i></div>Dribbble</a></li>
+                                    <li><a href="#"><div class="icon-wrap fs-19 d-inline-block bg-primary text-white text-center fb"><i class="fab fa-facebook-f"></i></div>Facebook </a></li>
+                            </ul>
+                    </div>
+            </div>
+    </div>
+</footer>
+<!-- /.End Footer -->
+<!-- Start Sub footer -->
+<div class="py-4 py-lg-3 sub-footer sub-footer__dark">
+    <div class="container">
+            <div class="row align-items-center">
+                    <div class="col">
+                        <div class="align-items-center justify-content-center justify-content-lg-start row">
+                            <!-- Start Footer Logo -->
+                            <div class="col-sm-auto footer-logo mb-3 mb-sm-0 text-center">
+                                <img class="footer-logo__white" src="{% static 'images/logo-white.png'%}" alt="">
+                                <img class="footer-logo__dark" src="{% static 'images/logo.png' %}" alt="">
+                            </div>
+                            <!-- /.End Footer Logo -->
+                            <!-- Start Copy Rights Text -->
+                            <div class="col-sm-auto copy text-center">© 2024 W - Все права защищены</div>
+                            <!-- /.End Copy Rights Text -->
+                        </div>
+                    </div>
+                    <div class="col-lg-auto">
+                            <ul class="list-unstyled text-center mb-0">
+                                    <li class="list-inline-item"><a href="privacy.html">Конфиденциальность</a></li>
+                                    <li class="list-inline-item"><a href="#">Карта сайта</a></li>
+                                    <li class="list-inline-item"><a href="#">Печенье</a></li>
+                                    <li class="list-inline-item"><a href="terms-conditions.html">Правила и условия</a></li>
+                            </ul>
+                    </div>
+            </div>
+    </div>
+</div>
+<!-- /.End Sub footer -->
+<!-- Optional JavaScript -->
+<script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script><script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/jquery.smartmenus.min.js' %}"></script>
+<script src="{% static 'js/jquery.smartmenus.bootstrap-4.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'js/select2.min.js' %}"></script>
+<script src="{% static 'js/ResizeSensor.min.js' %}"></script>
+<script src="{% static 'js/theia-sticky-sidebar.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/hideShowPassword.min.js' %}"></script>
+<script src="{% static 'js/ion.rangeSlider.min.js' %}"></script>
+<script src="{% static 'js/raty.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/vidbg.min.js' %}"></script>
+<script src="{% static 'js/waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'js/typed.min.js' %}"></script>
+<script src="{% static 'js/aos.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+{% block script %}{% endblock %}
+
+</body></html>

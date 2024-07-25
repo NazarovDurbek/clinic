@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% load static %}
+	<!-- /.End of navbar -->
+{% block content %}
+	<div class="bg-grey breadcrumb-wrap">
+		<div class="container">
+			<!-- Start Breadcrumbs -->
+			<div class="row gy-2 gx-4 gx-md-5">
+				<h4 class="col-auto fs-18 fw-bold mb-0 page-title text-capitalize">товары для здоровья</h4>
+				<div class="border-start col-auto">
+					<ol class="align-items-center breadcrumb fw-semibold mb-0">
+						<li class="breadcrumb-item d-flex align-items-center">
+							<a href="#" class="text-decoration-none"> <i class="fa-solid fa-house-chimney-crack fs-18"></i> </a>
+						</li>
+						<li class="breadcrumb-item d-flex align-items-center"> <a href="#" class="text-decoration-none">Категория</a> </li>
+						<li class="breadcrumb-item d-flex align-items-center active" aria-current="page">{{product.name }}</li>
+					</ol>
+				</div>
+			</div>
+			<!-- End Breadcrumbs -->
+		</div>
+	</div>
+	<div class="product-details-inner bg-grey py-5">
+		<div class="container pt-3">
+			<div class="row">
+				<div class="col-md-6 pe-xl-5">
+					<!-- Product Images & Alternates -->
+					<div class="product-images">
+						<div class="row">
+							<div class="col-3 col-sm-2 thumb-col">
+								<!-- Begin product thumb nav -->
+								<ul class="thumb-nav">
+									{% if product.images.all %}
+									{% for photo in product.images.all %}
+									<li class="border rounded"><img src="{{ photo.image.url }}" class="rounded w-100" alt=""></li>
+									{% endfor %}
+									{% endif %}
+								</ul>
+								<!-- /.End product thumb nav -->
+							</div>
+							<div class="col-9 col-sm-10 main-thumb_col">
+								<!-- Begin Product Images Slider -->
+								<div class="main-img-slider zoom-gallery">
+									{% for photo in product.images.all %}
+									<figure class="bg-white mb-0 p-3 rounded-3">
+										<a href="assets/img/product-gallery/big/1.jpg"> <img src="{% if photo %}{{photo.image.url}}{% else %}{% static 'images/1_1.jpg' %}{% endif %}" alt=""> </a>
+									</figure>
+									{% endfor %}
+								</div>
+								<!-- Start Cart Button -->
+
+								<!-- /.End Cart Button -->
+								<!-- End Product Images Slider -->
+
+								<!-- /.End of product video button -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="product-summary-content">
+						<!-- Start Start Rating -->
+
+						<!-- /.End Start Rating -->
+						<!-- Start Product Title -->
+						<h2 class="product-title fw-bold mb-3">{{product.name}}</h2>
+						<!-- End Product Title -->
+
+						<!-- Start Product Price Summary -->
+						<div class="align-items-center d-flex flex-wrap mb-1 product-price__summary">
+							<!-- Start Product Price -->
+							<div class="display-5 fw-bold price text-primary"> <span class="currency__symbol">р</span>{{product.discounted_price}}</div>
+							<!-- /.End Product Price -->
+							<!-- Start Price Discount -->
+							{% if product.discount %}
+							<del class="fs-21 fw-semibold price-discount ps-1 text-black-50">
+								<span class="price">
+									<span class="currency-symbol">р</span>{{product.price}}
+								</span>
+							</del>
+							<!-- /.End Price Discount -->
+							<!-- Start Price Discount Percentage  -->
+							<span class="fs-14 fs-16 fw-semibold ms-1 sale text-danger">(-{{product.discount}}%)</span>
+							{% endif %}
+							<!-- End Price Discount Percentage  -->
+						</div>
+						<!-- /.End Product Price Summary -->
+						<!-- Start Summary Header -->
+						<ul class="align-items-center border-bottom d-flex flex-wrap fw-medium list-unstyled mb-4 pb-2 summary-header">
+							<li class="position-relative px-2 px-md-3">
+								<div class="sold-by__meta"> <span class="text-dark fw-medium me-1">Продано: </span> <a href="#" class="fw-bold text-primary text-uppercase">Глобальный офис</a> </div>
+							</li>
+							<li class="position-relative px-2 px-md-3">
+								<div class="stock"><span class="text-dark fw-medium me-1">Статус:</span>{% if product.product_counts > 0 %}<span class="fw-bold text-success">{{ product.product_counts }} В наличии</span>{% else %}<span class="fw-bold text-danger">Нет в наличии</span>{% endif %}</div>
+							</li>
+						</ul>
+						<!-- /.End Summary Header -->
+						<!-- Start Short Description -->
+						<div class="short-description mb-4">
+							<p><strong>Сумма знаний</strong> будьте честны с элитой. Беременность или вынашивание ребенка могут потратить время на свидания. <strong>Ничего не перебродило</strong> самый большой клинический режим <a href="#" class="fw-bold">вечнозеленый</a>. В этой боли нет ничего невыносимого</p>
+						</div>
+						<p class="fs-16 fw-bold text-danger mb-4">Специальное предложение заканчивается в 23:00:45</p>
+						<!-- /.End Short Description -->
+						{% if product.product_counts > 0 %}
+						<form method="post" action="{% url 'app:basket_add' product.id %}" class="cart-row d-flex align-items-center">
+							{% csrf_token %}
+							<div class="input-spinner d-flex bg-white border rounded me-2">
+								<span class="minus position-relative dis"></span>
+								<input type="text" name="quantity" class="in-num text-center border-0" value="1" readonly>
+								<span class="plus position-relative"></span>
+							</div>
+							
+							<div class="row g-2 g-xl-3 mt-4">
+								<div class="col-sm-6 col-md-12 col-xxl-6">
+									<button type="submit" class="btn btn-lg btn-primary fw-bold rounded-pill w-100"><i class="fa-solid fa-cart-shopping me-2"></i>Добавить в корзину</button>
+								</div>
+							</div>
+						</form>
+						{% endif %}
+						<div class="border-top mt-4 product-meta pt-2">
+							<div class="posted-in mb-1"> <strong class="fw-medium me-1">Категория: </strong> <a href="#">{{product.category.name}}</a></div>
+						</div>
+						<!-- Start Delivery Area -->
+						<div class="delivery-area mt-3">
+							<!-- Start Delivery List -->
+							<ul class="cs-callout cs-callout-danger delivery-list fs-14 fw-semibold list-unstyled m-0 px-0 py-3 rounded text-danger">
+								<li class="delivery">Обычно отправляется в течение 2 рабочих дней<span class="mark ml-1 p-0 text-primary bg-transparent">*</span></li>
+							</ul>
+							<!-- /.End Delivery List -->
+							<!-- Start delivery info -->
+							<div class="delivery-info mt-2 text-black-50 fs-14"> <span class="mark bg-transparent required"></span>Варианты доставки могут варьироваться в зависимости от региона. </div>
+							<!-- /.End delivery info -->
+						</div>
+						<!-- /.End Delivery Area -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bg-grey pb-5">
+		<div class="container">
+			<!-- Start Tab Nav -->
+			<ul class="nav nav-tabs justify-content-center mb-4 border-bottom" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="tab-one" data-bs-toggle="tab" data-bs-target="#tab-one-pane" type="button" role="tab" aria-controls="tab-one-pane" aria-selected="true">Описание</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="tab-two" data-bs-toggle="tab" data-bs-target="#tab-two-pane" type="button" role="tab" aria-controls="tab-two-pane" aria-selected="false">Дополнительная информация</button>
+				</li>
+			</ul>
+			<!-- /.End Tab Nav -->
+			<!-- Start Tab Content -->
+			<div class="tab-content border rounded-4 bg-white p-4 p-sm-5">
+				<div class="tab-pane fade show active" id="tab-one-pane" role="tabpanel" aria-labelledby="tab-one" tabindex="0">
+					<div>
+						<!-- Start Title -->
+						<h4 class="fw-semibold mb-4 text-capitalize"><i class="fa-file-waveform fa-solid me-2 text-primary"></i>Product <span class="underline position-relative text-primary">Описание</span></h4>
+						<!-- /.End Title -->
+						<p class="mb-4">Активный глюкометр Accu-Chek с бесплатными 10 тест-полосками</p>
+						<h5 class="mb-3">Основные характеристики продукта</h5>
+						<ul class="list-checked">
+							{% for info in product.product_description.all %}
+							{% if info.type == 'dc' %}
+							<li>{{ info.description }}</li>
+							{% endif %}
+							{% endfor %}
+							 </ul>
+							 <p> Ниже приведен стандартный набор Lorem Ipsum, используемый с 1500-х годов.</p>
+							 <p> В нем используется словарь из более чем 200 латинских слов в сочетании с несколькими типовыми структурами предложений для создания Lorem Ipsum, который</p>
+							 <h5 class="mb-3">Технические характеристики продукта:</h5>
+							 <ul class="список проверен">
+								<li> Существует множество вариаций отрывков из "Lorem Ipsum", но большинство из них пострадали.</li>
+								<li>Краткая биография Льва, конец которого лежит на его языке.</li>
+								<li>На протяжении многих лет появлялись различные версии, иногда случайно, иногда намеренно (с добавлением юмора и тому подобного).</li>
+								<li>В настоящее время существует множество настольных издательских пакетов и редакторов веб-страниц</li>
+								<li>Отрывки из Lorem Ipsum, а совсем недавно - с настольным издательским программным обеспечением, таким как Aldus PageMaker, включая версии Lorem Ipsum.</li>
+								<li>Вопреки распространенному мнению, Lorem Ipsum - это не просто случайный текст. Он восходит к произведению классической латинской литературы, датируемому 45 годом до н.э., а его возраст превышает 2000 лет</li>
+								<li>Ричард Макклинток, профессор латыни в Хэмпден-Сиднейском колледже</li>
+								<li>Основные сведения взяты из разделов 1.10.32 и 1.10.33 книги Цицерона "De Finibus Bonorum et Malorum" ("Крайности добра и зла")</li>
+								<li> Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", взята из строки раздела 1.10.32.</li>
+								<li> Разделы 1.10.32 и 1.10.33 из книги Цицерона "О конце добра и зла"</li>
+						</ul>
+						<h5 class="mb-3">Инструкция по применению:</h5>
+						<ul class="list-checked">
+							<li>Таким образом, генерируемая информация всегда свободна от повторений, привнесенного юмора, нехарактерных слов и т.д.</li>
+ 							<li>Учение о долге перед богом...", взято из строки раздела 1.10.32.</li>
+						</ul>
+						<h5 class="mb-3">Информация по технике безопасности:</h5>
+						<ul class="list-checked">
+							<li>Генераторы в Интернете, как правило, повторяют предопределенные фрагменты по мере необходимости,</li>
+ 							<li>Обнаруженный несомненный источник - классическая литература. Основные сведения взяты из разделов 1.10.32 и 1.10.33 книги Цицерона "de Finibus"
+ 								"Bonorum et Malorum" ("Крайности добра и зла"),</li>
+ 							<li>Популярен в эпоху Возрождения. Первая строка Lorem Ipsum</li>
+							<li>Листы Letraset, содержащие отрывки из Lorem Ipsum, а с недавних пор и настольные </li>
+							<li>Основные сведения взяты из разделов 1.10.32 и 1.10.33 книги "О конце"</li>
+							<li>Эта книга представляет собой трактат по теории этики, очень популярный в эпоху Возрождения.</li>
+						</ul>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="tab-two-pane" role="tabpanel" aria-labelledby="tab-two" tabindex="0">
+					<!-- Start Title -->
+					<h4 class="fw-semibold mb-4 text-capitalize"><i class="fa-file-waveform fa-solid me-2 text-primary"></i>Дополнительный <span class="underline position-relative text-primary">информация</span></h4>
+					<!-- /.End Title -->
+					<div class="table-responsive">
+						<table class="table ws-nowrap">
+							<thead>
+								<tr>
+									<th width="30%"></th>
+									<th width="70%"></th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for info in product.product_description.all %}
+								{% if info.type == 'ai' %}								
+								<tr>
+									<td class="bg-grey align-middle">
+										<h6 class="mb-0 fw-semibold px-4 fs--1 lh-sm">{{ info.name }}</h6>
+									</td>
+									<td class="px-5 mb-0">{{ info.description }}</td>
+								</tr>
+								{% endif %}
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+	<div class="bg-grey pb-5">
+		<div class="container pb-3">
+			<!-- Start Title -->
+			<h4 class="fw-semibold mb-4 text-capitalize">Related <span class="underline position-relative text-primary">Product</span>
+			</h4>
+			<!-- /.End Title -->
+			<div class="row g-3">
+				{% for prod in products %}
+				<div class="col-6 col-sm-4 col-xl-2">
+					<!-- Start Product Card -->
+					<div class="product-card card card-body border-0 shadow">
+						<!-- Start Image -->
+						<a href="{{ prod.get_absolute_url }}" target="_blank" class="d-block overflow-hidden product-img__link"> <img src="{{ prod.get_first_photo }}" class="img-fluid product-img" alt=""> </a>
+						<!-- End Image -->
+						<!-- Start heading -->
+						<h3 class="fs-15 fw-semibold mt-2 overflow-hidden product-name">
+							<a href="{{ prod.get_absolute_url }}" target="_blank" class="text-black text-decoration-none">{{ prod.name }}</a>
+						</h3>
+						<!-- End heading -->
+						<!-- Start Rating -->
+						<!-- End Rating -->
+						<!-- Start Price -->
+						<div class="fs-15 fst-italic fw-bold product-price text-dark">р {{prod.discounted_price}}</div>
+						<!-- End Price -->
+					</div>
+					<!-- End Product Card -->
+				</div>
+				{% endfor %}
+				
+					<!-- End Product Card -->
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- Start Footer -->
+{% endblock %}

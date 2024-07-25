@@ -1,0 +1,372 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load static %}
+	<!-- /.End of navbar -->
+{% block content %}
+	<div class="breadcrumb-wrap">
+		<div class="container">
+			<!-- Start Breadcrumbs -->
+			<div class="row gy-2 gx-4 gx-md-5">
+				<h4 class="col-auto fs-18 fw-bold mb-0 page-title text-capitalize">Проверка</h4>
+				<div class="border-start col-auto">
+					<ol class="align-items-center breadcrumb fw-semibold mb-0">
+						<li class="breadcrumb-item d-flex align-items-center">
+							<a href="#" class="text-decoration-none"> <i class="fa-solid fa-house-chimney-crack fs-18"></i> </a>
+						</li>
+						<li class="breadcrumb-item d-flex align-items-center"> <a href="#" class="text-decoration-none">корзина покупок</a> </li>
+						<li class="breadcrumb-item d-flex align-items-center"> <a href="#" class="text-decoration-none">Проверка</a> </li>
+						<li class="breadcrumb-item d-flex align-items-center active" aria-current="page">Заказ выполнен </li>
+					</ol>
+				</div>
+			</div>
+			<!-- /.End Breadcrumbs -->
+		</div>
+	</div>
+	<div class="py-5">
+		<div class="container py-3">
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-lg-8 pe-xl-5 content">
+					<!-- Start collapse Toggle -->
+
+					<!-- /.End collapse Toggle -->
+					<!-- Start Collapse -->
+					<div class="collapse" id="returning">
+						<div class="card rounded-4">
+							<div class="card-body p-4">
+								<p class="mb-4">Если вы уже совершали покупки у нас ранее, пожалуйста, введите свои данные ниже. Если вы новый клиент, пожалуйста, перейдите в раздел выставления счетов.</p>
+								<div class="row g-4">
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Имя пользователя или адрес электронной почты</label>
+											<input type="email" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Пароль</label>
+											<input type="email" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+								</div>
+								<!-- Start Checkbox -->
+								<div class="form-check mt-4">
+									<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+									<label class="form-check-label text-dark" for="flexCheckDefault"> Помни меня <a href="#">Потеряли свой пароль?</a> </label>
+								</div>
+								<!-- /.End Checkbox -->
+								<!-- Start Button -->
+								<button type="button" class="btn btn-primary btn-lg mt-2">Авторизоваться<i class="fa-solid fa-arrow-right-to-bracket fs-14 ms-2"></i></button>
+								<!-- /.End Button -->
+							</div>
+						</div>
+					</div>
+					<!-- /.End Collapse -->
+					<!-- Start collapse Toggle -->
+
+					<!-- /.End collapse Toggle -->
+					<!-- Start Collapse -->
+					<div class="collapse" id="collapseCoupon">
+						<div class="card rounded-4">
+							<div class="card-body p-4">
+								<p class="mb-4">Если у вас есть код купона, пожалуйста, примените его ниже.</p>
+							</div>
+						</div>
+					</div>
+					<!-- /.End Collapse -->
+					<!-- Start Title -->
+					<div class="h3 align-items-center d-flex fs-21 fw-bold l-spacing-1 my-5 text-uppercase"> <span>Платежные реквизиты</span>
+						<hr class="m-0 flex-grow-1 ms-2"> </div>
+						{% if form.errors %}
+    <ul>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li>{{ error|escape }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+						<form method="post" action="{% url 'app:convert_baskets_to_order' %}" >
+					{% csrf_token %} 
+					<!-- /.End Title -->
+					<div class="row g-4">
+						<div class="col-sm-6">
+							<!-- Start Form Group -->
+							<div class="form-group">
+								<label class="required">Имя</label>
+								{{ form.receiver_name }} </div>
+							<!-- /.End Form Group -->
+						</div>
+						<div class="col-sm-6">
+							<!-- Start Form Group -->
+							<div class="form-group">
+								<label>Фамилия <span>*</span></label>
+								{{ form.receiver_surname }} </div>
+							<!-- /.End Form Group -->
+						</div>
+						<div class="col-12">
+							<!-- Start Form Group -->
+							<div class="form-group">
+								<label>Название улицы</label>
+								{{ form.receiver_address }} </div>
+							<!-- /.End Form Group -->
+						</div>
+						<div class="col-12">
+							<!-- Start Form Group (Select) -->
+							<div class="form-group">
+								<label class="required">Страна/Регион</label>
+								{% get_cities as cities %}
+								<select name="receiver_city" class="form-select">
+									{% for city in cities %}
+									<option value="{{city.id}}" selected="selected">{{city.name}}</option>
+								{% endfor %}
+								</select>
+							</div>
+							<!-- /.End Form Group (Select) -->
+						</div>
+
+
+						<div class="col-sm-6">
+							<!-- Start Form Group (Select) -->
+							<div class="col-12">
+								<!-- Start Form Group -->
+								<div class="form-group">
+									<label class="required">Адрес электронной почты</label>
+									{{form.receiver_email}} </div>
+								<!-- /.End Form Group -->
+							</div>
+							<!-- /.End Form Group (Select) -->
+						</div>
+
+						<div class="col-sm-6">
+							<!-- Start Form Group -->
+							<div class="form-group">
+								<label class="required">Телефон</label>
+								{{form.receiver_phone}} </div>
+							<!-- /.End Form Group -->
+						</div>
+
+						<div class="col-12">
+							<!-- Start Title -->
+							<div class="h3 align-items-center d-flex fs-21 fw-bold l-spacing-1 my-3 text-uppercase"> <span>Адрес доставки</span>
+								<hr class="m-0 flex-grow-1 ms-2"> </div>
+							<!-- /.End Title -->
+						</div>
+						<div class="col-12">
+							<!-- Start Collapse Toggle -->
+
+							<!-- /.End Collapse Toggle -->
+							<!-- Start Collapse -->
+							<div class="collapse" id="collapseSeven">
+								<div class="row g-4 pt-4">
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Имя</label>
+											</div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label>Фамилия <span>*</span></label>
+											</div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-12">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label>Название компании (необязательно)</label>
+											<input type="text" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-12">
+										<!-- Start Form Group (Select) -->
+										<div class="form-group">
+											<label class="required">Страна/Регион</label>
+											<select name="country" class="form-select">
+												<option value="default" selected="selected">Соединенные Штаты(US)</option>
+												<option value="uk">Объединенное Королевство (UK)</option>
+												<option value="us">Соединенные Штаты</option>
+												<option value="fr">Франция</option>
+												<option value="aus">Австралия</option>
+											</select>
+										</div>
+										<!-- /.End Form Group (Select) -->
+									</div>
+									<div class="col-12">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Адрес улицы</label>
+											<input type="text" id="address3" class="form-control mb-3" placeholder="House number and street name">
+											<input type="text" id="address4" class="form-control" placeholder="Apartment, suite, unit, etc. (optonal)"> </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Населенный пункт / Город</label>
+											</div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group (Select) -->
+										<div class="form-group">
+											<label class="required">Государство</label>
+											<select name="state" class="form-select">
+												<option value="default" selected="selected">Калифорния</option>
+												<option value="uk">Соединенное Королевство (UK)</option>
+												<option value="us">Соединенные Штаты</option>
+												<option value="fr">Франция</option>
+												<option value="aus">Австралия</option>
+											</select>
+										</div>
+										<!-- /.End Form Group (Select) -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">застежка-молния</label>
+											<input type="text" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+									<div class="col-sm-6">
+										<!-- Start Form Group -->
+										<div class="form-group">
+											<label class="required">Телефон</label>
+											<input type="number" class="form-control"> </div>
+										<!-- /.End Form Group -->
+									</div>
+								</div>
+							</div>
+							<!-- /.End Collapse -->
+						</div>
+						<div class="col-12">
+							<!-- Start Form Group (textarea) -->
+							<div class="form-group">
+								<label>Другие примечания (необязательные)</label>
+								{{form.message}}
+							</div>
+							<!-- /.End Form Group (textarea) -->
+						</div>
+						<input type="submit" class="form-control">
+					</div>
+				</form>
+				</div>
+				<div class="col-md-5 col-lg-4 sidebar">
+					<!-- Start Card Summary -->
+					<div class="card border-0 shadow rounded-4 card-summary">
+						<div class="card-body p-4 p-md-3 p-lg-4 p-xl-5">
+							<!-- Start Title -->
+							<div class="h4 align-items-center d-flex fs-16 fw-bold l-spacing-1 mb-4 text-uppercase"> <span>ВАШ ЗАКАЗ</span>
+								<hr class="m-0 flex-grow-1 ms-2"> </div>
+							<!-- /.End Title -->
+							<!-- Start Order Summary  -->
+							<div class="mb-4">
+								{% for basket in baskets %}
+								<div class="row g-2">
+									<div class="col">
+										<div class="d-flex">
+											<div class="flex-shrink-0"> <img alt="Image placeholder" src="{{ basket.product.get_first_photo }}" width="56" class="border rounded-3"> </div>
+											<div class="flex-grow-1 ms-3">
+												<h5 class="fs-15 fw-semibold mb-1">{{basket.product.name}}</h5>
+												<div class="text-black-50 fs-14">{{basket.quantity}} x р {{basket.product.discounted_price}}</div>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+							</div>
+							<!-- /.End Order Summary  -->
+							<!-- Start Order Total -->
+							<div class="mb-4">
+								<!-- Start Title -->
+								<div class="h4 align-items-center d-flex fs-16 fw-bold l-spacing-1 mb-4 text-uppercase"> <span>Общее количество заказов</span>
+									<hr class="m-0 flex-grow-1 ms-2"> </div>
+								<ul class="list-unstyled m-0">
+									<li class="align-items-center d-flex fs-15 fw-semibold justify-content-between mb-1 text-dark"><span class="mr-2">Промежуточный итог:</span><span class="text-right">р {{baskets.total_sum}}</span></li>
+									<li class="align-items-center d-flex fs-15 fw-semibold justify-content-between mb-1 text-dark"><span class="mr-2">Доставка:</span><span class="text-right">—</span></li>
+									<li class="align-items-center d-flex fs-15 fw-semibold justify-content-between mb-1 text-dark"><span class="mr-2">Налоги:</span><span class="text-right">р {{baskets.total_tax}}</span></li>
+									<li class="align-items-center d-flex fs-15 fw-semibold justify-content-between mb-1 text-dark"><span class="mr-2">Скидка:</span><span class="text-right">—</span></li>
+								</ul>
+							</div>
+							<!-- /.End Order Total -->
+							<!-- Start Shipping Methods -->
+							<div class="mb-4">
+								<!-- Start Title -->
+								<div class="h4 align-items-center d-flex fs-16 fw-bold l-spacing-1 mb-4 text-uppercase"> <span>Доставка</span>
+									<hr class="m-0 flex-grow-1 ms-2"> </div>
+								<!-- /.End Title -->
+								<!-- Start Form Check -->
+
+								<!-- /.End Form Check -->
+								<!-- Start Form Check -->
+
+								<!-- /.End Form Check -->
+								<!-- Start Form Check -->
+								<div class="form-check mb-1">
+									<label class="form-check-label text-dark" for="flexRadioDefault3"> Фиксированная ставка: (Стоимость - р 5,00) </label>
+								</div>
+								<!-- /.End Form Check -->
+							</div>
+							<!-- /.End Shipping Methods -->
+							<!-- Start Total Order -->
+							{% get_total_price price=baskets.total_sum nds=baskets.total_tax delivery=5 as total_price %}
+							<div class="border-bottom border-top fs-18 fw-semibold mb-4 py-3 text-center text-dark">Общее количество заказов: р {{total_price}}</div>
+							<!-- /.End Total Order -->
+							<!-- Start Payment Methods -->
+							<div class="mb-4">
+								<!-- Start Title -->
+								<div class="h4 align-items-center d-flex fs-16 fw-bold l-spacing-1 mb-4 text-uppercase"> <span>Способ оплаты</span>
+									<hr class="m-0 flex-grow-1 ms-2"> </div>
+								<!-- /.End Title -->
+								<!-- Start Accordion -->
+								<div class="accordion" id="accordionExample">
+									<div class="">
+										<div class="accordion-header" id="headingOne">
+
+
+									<div class="">
+										<div class="accordion-header" id="headingThree">
+											<div class="form-check mb-2">
+												<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
+												<label class="form-check-label text-dark" for="flexRadioDefault6" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-controls="collapseThree"> Наложенный платеж при доставке</label>
+											</div>
+										</div>
+										<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+											<div class="bg-grey p-3 rounded-4 mb-2"> Оплатите наличными при доставке. </div>
+										</div>
+									</div>
+									<div class="">
+										<div class="accordion-header" id="headingFour">
+											<div class="form-check mb-2">
+												<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7">
+												<label class="form-check-label text-dark" for="flexRadioDefault7" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-controls="collapseFour"> <span class="d-flex align-items-center">
+                            <span>Paypal</span> <img src="{% static 'images/AM_mc_vs_dc_ae.jpg' %}" class="flex-shrink-0 ms-2" height="25" alt=""> <a href="#" class="flex-grow-1 ms-2 text-decoration-underline">Что такое Paypal?</a> </span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+										<div class="bg-grey p-3 rounded-4"> Оплатите через PayPal; вы можете расплатиться своей кредитной картой, если у вас нет учетной записи PayPal. </div>
+									</div>
+								</div>
+								<!-- /.End Accordion -->
+							</div>
+							<!-- /.End Payment Methods -->
+							<!-- Start Button -->
+							<!-- /.End Button -->
+							<!-- Start Link --><a href="product.html" class="d-block fw-semibold mt-3 text-center text-decoration-underline">Возвращайся в
+магазин</a>					
+							<!-- /.End Link -->
+						</div>
+					</div>
+					<!-- /.End Card Summary -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+	<!-- Start Footer -->
+{% endblock %}

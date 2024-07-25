@@ -1,0 +1,392 @@
+{% extends "base.html" %}
+{% load static %}
+	<!-- /.End of navbar -->
+	<!-- Start Page Header -->
+{% block content %}
+	<div class="bg-img-hero position-relative profile-header pt-5 text-white background-no-repeat background-size-cover" data-image-src="{% static 'assets/img/header/04.jpg' %}">
+		<div class="container my-5 pb-4 position-relative pt-5 z-index-1">
+			<div class="row justify-content-center">
+				<div class="col-lg-6">
+					<div class="doctor-info position-relative text-center text-white">
+						<!-- Start Speciality -->
+						<!-- /.End Speciality -->
+						<!-- /.End Star Rating -->
+						<!-- Start Doctor Degrees -->
+						<h1 class="text-white fw-bold">Бакалавр в области <span class="underline position-relative text-primary">{{doctor.specialty}}а</span>, Медицина и хирургия (BAMS)</h1>
+						<!-- /.End Doctor Degrees -->
+						<!-- Start Doctor Clinic Locations -->
+						<div class="fs-16 fw-medium l-spacing-1 mt-3 text-uppercase"><i class="fa-solid fa-location-dot me-2"></i>Больницы {{doctor.hospital.name}} в {{doctor.hospital.city}}</div>
+						<!-- /.End Doctor Clinic Locations -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Start Info Box -->
+		<div class="container position-relative info-box z-index-1">
+			<div class="row g-0">
+				<div class="col-6 col-md-3 text-center p-3 p-sm-4 p-md-3 p-lg-4">
+					<div class="fs-15 mb-1 fw-medium">Общий опыт</div>
+					<div class="fs-20 fw-semibold">{{doctor.experience}} Год</div>
+				</div>
+				<div class="col-6 col-md-3 text-center p-3 p-sm-4 p-md-3 p-lg-4">
+					<div class="fs-15 mb-1 fw-medium">Регистрационный номер</div>
+					<div class="fs-20 fw-semibold">66183</div>
+				</div>
+				<div class="col-6 col-md-3 text-center p-3 p-sm-4 p-md-3 p-lg-4">
+					<div class="fs-15 mb-1 fw-medium">Присоединился к консулам</div>
+					<div class="fs-20 fw-semibold">25 Mar 2021</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- /.End Info Box -->
+	</div>
+	<!-- /.End Page Header -->
+	<div class="py-5">
+		<div class="container">
+			<!-- Start Profile Card -->
+			<div class="bg-white header-body mb-4 overflow-hidden rounded rounded-4 shadow">
+				<div class="align-items-center g-0 py-4 px-4 px-sm-5 row">
+					<!-- background: linear-gradient(180deg,rgba(61,101,213,0),rgba(61,101,213,.06)),#fff;
+                border-bottom: 1px solid rgba(61,101,213,.2); -->
+					<div class="col">
+						<div class="d-sm-flex align-items-center">
+							<div class="flex-shrink-0 mb-4 mb-sm-0 text-center">
+								<div class="avatar header-avatar p-1 p-sm-2 rounded-circle shadow"> <img src="{{doctor.image.url}}" alt="..." class="avatar-img rounded-circle">
+									<!-- Start Online Dot -->
+									<div class="online position-absolute"> <span class="heartbit"></span> <span class="point"></span> </div>
+									<!-- End Online Dot -->
+								</div>
+							</div>
+							<div class="flex-grow-1 ms-sm-3">
+								<h6 class="fs-12 l-spacing-1 mb-1 text-uppercase">{{ doctor.specialty }}</h6>
+								<!-- <h2 class="">Dr. Khandaker Fadwana Islam</h2> -->
+								<!-- Start Name -->
+								<h2 class="fw-semibold mb-1">Доктор {{doctor.name}}</h2>
+								<!-- End Name -->
+								<!-- Start Designation -->
+								<div class="fw-semibold text-primary">Магистр медицины (DVL), FAM (стипендия в области эстетической медицины), ILAMED, аффилированный с
+									<br> Гризевальдский университет Германия </div>
+								<!-- Start Designation -->
+								<!-- Start Social Link -->
+								<div class="social-links d-flex flex-wrap mt-4"> <a href="#" class="fb d-flex align-items-center justify-content-center fs-17 text-white rounded me-1 mb-1"><i class="fab fa-facebook-f"></i></a> <a href="#" class="tw d-flex align-items-center justify-content-center fs-17 text-white rounded me-1 mb-1"><i class="fab fa-twitter"></i></a> <a href="#" class="ins d-flex align-items-center justify-content-center fs-17 text-white rounded me-1 mb-1"><i class="fab fa-instagram"></i></a> <a href="#" class="pr d-flex align-items-center justify-content-center fs-17 text-white rounded me-1 mb-1"><i class="fab fa-pinterest-p"></i></a> <a href="#" class="li d-flex align-items-center justify-content-center fs-17 text-white rounded me-1 mb-1"><i class="fab fa-linkedin-in"></i></a> </div>
+								<!-- /.End Social Link -->
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-auto">
+						<div class="mt-4 mt-md-0 mb-3">
+							<div class="align-items-center d-flex justify-content-center price-area">
+								<div class="fs-36 fw-semibold purchase-price">
+									<div class="main-price text-primary">{{doctor.salary}}р</div>
+								</div>
+							</div>
+							<div class="mt-2 text-center"> <strong class="small">(вкл. НДС)</strong>
+								<div class="small">За каждую консультацию</div>
+							</div>
+						</div>
+						<a href="{% url 'app:book_slot' doc_id=doctor.id type="online" %}" type="button" class="btn btn-primary fw-medium mb-2 w-100"><i class="fa-solid fa-video me-2"></i>Закажите видео-консультацию</a>
+						<br>
+						<a href="{% url 'app:book_slot' doc_id=doctor.id type="offline" %}" type="button" class="btn btn-warning w-100 fw-medium"><i class="fa-solid fa-house-chimney-medical me-2"></i>Забронировать посещение больницы</a>
+					</div>
+				</div>
+				<!-- Start Tabs Nav -->
+				<ul class="border-0 nav nav-tabs ps-4 ps-sm-5" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="tab-one" data-bs-toggle="tab" data-bs-target="#tab-one-pane" type="button" role="tab" aria-controls="tab-one-pane" aria-selected="true"><i class="fa-solid fa-circle-info me-2"></i>Инфо</button>
+					</li>
+				</ul>
+				<!-- /.End Tabs Nav -->
+			</div>
+			<!-- /.End Profile Card -->
+		</div>
+		<div class="container">
+			<div class="tab-content bg-white p-4 p-sm-5 rounded-4 shadow">
+				<div class="tab-pane fade show active" id="tab-one-pane" role="tabpanel" aria-labelledby="tab-one" tabindex="0">
+					<div class="cs-content">
+						<h2></h2>
+						<p class="fs-18">{{ doctor.description }}</p>
+						<h3>График</h3>
+						<!-- Start Table -->
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>День</th>
+										<th>Время</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for day in doctor.doctor_schedule.all %}
+									<tr>
+										<th>{{day.day_of_week}}</th>
+										<td> {{day.start_time}}&nbsp;&nbsp;&nbsp;{{day.end_time}}</td>
+									</tr>	
+									{% endfor %}								
+								</tbody>
+							</table>
+						</div>
+						<!-- /.End Table -->
+						<h3>Образование</h3>
+						<p><b>Выпускной : MBBS</b>
+							<br>Уходящий год : January, 1997
+							<br> Институт : Медицинский колледж Рангпура (Университет Раджшахи), Бангладеш.
+							<br>
+							<br><span><b>Последипломное образование:
+                                    MD </b>(<span>Доктор медицинских наук в
+										области клинической гематологии)<br></span></span>Уходящий год : Январь, 2012
+							<br><span>Институт
+                                : Медицинский университет Бангабандху Шейха Муджиба (BSMMU), Дакка, Бангладеш.
+                                <br><br></span><b>Постдокторский </b><b>Общение в</b> <b>Педиатрия
+									Трансплантация стволовых клеток</b> <span><br>Период времени : С 1 ноября 2014 по 1 ноября 2015 (01
+										год)</span> <span><br>Организация : Тегеранский университет медицинских наук, Тегеран,
+											Иран</span> <span><br>Место работы: Исследовательский центр гематологии
+												и онкологии и трансплантации стволовых клеток, Больница Шариати, Тегеран,
+												Иран</span>
+							<br> </p>
+						<p>Этот веб-сайт работает с браузерами Internet Explorer 8 или более поздней версии, Mozilla Firefox 3 или более поздней версии, Google Chrome 12 или более поздней версии и Apple Safari 3.2.3 или более поздней версии.Последнее обновление нашей базы данных было произведено 14.02.2017 в 3:05:39 утра.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pb-5">
+		<div class="container">
+			<!-- Start Title -->
+			<h4 class="fw-semibold mb-4 text-capitalize">Связанный <span class="underline position-relative text-primary">Врачи</span></h4>
+			<!-- /.End Title -->
+			<div class="row g-4 justify-content-center">
+				{% for doc in doctors %}
+				<div class="col-md-6 col-xl-4 d-flex">
+					<!-- Start Card -->
+					<a href="doctor-details.html" class="border-0 text-inherit card overflow-hidden shadow doctor-card bg-soft-primary w-100 flex-fill">
+						<div class="card-body p-0">
+							<div class="bg-white d-flex p-3 p-lg-4 p-md-3 p-sm-4">
+								<!-- Start Avatar Wrap -->
+								<div class="d-block doctor-avatar flex-shrink-0 me-3 p-2 position-relative rounded-bottom rounded-circle shadow">
+									<!-- Start Online Dot -->
+									<div class="online position-absolute"> <span class="heartbit"></span> <span class="point"></span> </div>
+									<!-- End Online Dot -->
+									<!-- Start Avatar --><img src="{{ doc.image.url }}" alt="" class="rounded-bottom rounded-circle">
+									<!-- End Avatar -->
+								</div>
+								<!-- End Avatar Wrap -->
+								<div class="flex-grow-1">
+									<!-- Start Name -->
+									<h6 class="fs-17 fw-semibold mb-2 mb-sm-1">Доктор {{doc.name}}</h6>
+									<!-- End Name -->
+									<!-- Start Designation -->
+									<div class="fw-semibold mb-0 mb-sm-2 small text-primary">MBBS, MD, FCCM, FCCP, EDIC </div>
+									<!-- Start Designation -->
+									<!-- Start Language Skills -->
+									<div class="d-none d-sm-block small">{% for ln in doc.languages.all %} {{ln.name}}{% endfor %}</div>
+									<!-- End Language Skills -->
+									<!-- Start Chamber  -->
+									<div class="d-none d-sm-block small">Больницы Apollo в Индрапрастхе, Южный Дели </div>
+									<!-- End Chamber  -->
+								</div>
+							</div>
+							<!-- <hr> -->
+							<div class="bg-white p-3 p-lg-4 p-md-3 p-sm-4 pt-0 pt-lg-0 pt-sm-0">
+								<div class="row g-3">
+									<div class="col-auto col-md-12">
+										<h6 class="fs-13 mb-1 text-muted">Работая в</h6>
+										<div class="fw-bold text-black fs-15">Больницы {{doc.hospital.name}} в {{doc.hospital.city}}</div>
+								</div>
+									<div class="col-auto">
+										<h6 class="fs-13 mb-1 text-muted">Общий опыт</h6>
+										<div class="fw-bold text-black fs-15">{{doc.experience}} лет</div>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex p-3 p-lg-4 p-md-3 p-sm-4">
+								<div class="col-auto">
+									<div class="align-items-sm-center d-sm-flex d-xl-block">
+										<div class="align-items-center d-flex price-area">
+											<div class="fs-32 fw-bold purchase-price">
+												<div class="main-price text-primary">{{doc.salary}}р</div>
+											</div>
+										</div>
+										<div class="flex-grow-1 mt-2 ms-sm-3 ms-xl-0 mt-xl-2"> <strong class="small">(вкл. НДС)</strong>
+											<div class="small">За каждую консультацию</div>
+										</div>
+									</div>
+								</div>
+								<div class="align-self-center ms-auto"> <i class="fa-solid fa-arrow-right fs-19 text-primary"></i> </div>
+							</div>
+						</div>
+					</a>
+					<!-- /.End Card -->
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!--Related Articles-->
+	<div class="pb-5">
+		<div class="container pb-3">
+			<div class="row">
+				<div class="col-md-10 offset-md-1">
+					<!-- Start Section Header Title -->
+					<div class="section-header text-center mb-5">
+						<!-- Start Section Header title -->
+						<h2 class="fw-semibold mb-2 section-header__title text-capitalize">Доступное по цене полное тело <span class="underline position-relative text-primary">здоровье</span> осмотры</h2>
+						<!-- /.End Section Header Title -->
+						<!-- Start Section Header Sub Title -->
+						<div class="sub-title fs-16"> Наши гости всегда путешествуют по миру со вкусом. Упомяните @Kempinski
+							<br class="d-none d-lg-block"> on Instagram for a chance to be featured! </div>
+						<!-- /.End Section Header Sub Title -->
+					</div>
+					<!--/. End Section Header -->
+				</div>
+			</div>
+			<div class="blog-carousel owl-carousel owl-theme">
+				<!-- Start Blog Article -->
+				<article class="thumb-post" data-aos="fade" data-aos-delay="300">
+					<!-- Start Entry Content -->
+					<div class="entry-content mb-3 overflow-hidden position-relative rounded">
+						<!-- Start Post Image -->
+						<a href="blog-details.html"><img src="{% static 'images/01-md.jpg' %}" class="entry-img overflow-hidden h-100 bg-light" alt=""></a>
+						<!-- /.End Post Image -->
+						<div class="entry-content-caption h-100 overflow-hidden p-4 position-absolute start-0 text-white top-0 w-100">
+							<!-- Start Description -->
+							<!-- /.End Description -->
+							<!-- Start Post Date --><span class="posted-on">
+                                <time class="entry-date published" datetime="2016-09-09T10:06:40+00:00"></time>
+                            </span>
+							<!-- /.End Post Date -->
+						</div>
+					</div>
+					<!-- /.End Entry Content -->
+					<!-- Start Entry Header -->
+					<header class="entry-header">
+						<!-- Start Category --><a href="blog-category.html" class="entry-cat mb-1 d-block fw-semibold">Dentist</a>
+						<!-- /.End Category -->
+						<!-- Start Title -->
+						<h3 class="entry-title fs-17 fw-semibold mb-0"><a class="d-block text-dark" href="blog-details.html">Teething troubles? Schedule a dental
+                                checkup</a></h3>
+						<!-- /.End Title -->
+					</header>
+					<!-- /.End Entry Header -->
+				</article>
+				<!-- /.End Blog Article -->
+				<!-- Start Blog Article -->
+				<article class="thumb-post" data-aos="fade" data-aos-delay="400">
+					<!-- Start Entry Content -->
+					<div class="entry-content mb-3 overflow-hidden position-relative rounded">
+						<!-- Start Post Image -->
+						<a href="blog-details.html"><img src="{% static 'images/02-md.jpg' %}" class="entry-img overflow-hidden h-100 bg-light" alt=""></a>
+						<!-- /.End Post Image -->
+						<div class="entry-content-caption h-100 overflow-hidden p-4 position-absolute start-0 text-white top-0 w-100">
+							<!-- Start Description -->
+							<!-- /.End Description -->
+							<!-- Start Post Date --><span class="posted-on">
+                                <time class="entry-date published" datetime="2016-09-09T10:06:40+00:00"></time>
+                            </span>
+							<!-- /.End Post Date -->
+						</div>
+					</div>
+					<!-- /.End Entry Content -->
+					<!-- Start Entry Header -->
+					<header class="entry-header">
+						<!-- Start Category --><a href="blog-category.html" class="entry-cat mb-1 d-block fw-semibold">Gynecologist/Obstetrician</a>
+						<!-- /.End Category -->
+						<!-- Start Title -->
+						<h3 class="entry-title fs-17 fw-semibold mb-0"><a class="d-block text-dark" href="blog-details.html">Teething troubles? Schedule a dental
+                                checkup</a></h3>
+						<!-- /.End Title -->
+					</header>
+					<!-- /.End Entry Header -->
+				</article>
+				<!-- /.End Blog Article -->
+				<!-- Start Blog Article -->
+				<article class="thumb-post" data-aos="fade" data-aos-delay="500">
+					<!-- Start Entry Content -->
+					<div class="entry-content mb-3 overflow-hidden position-relative rounded">
+						<!-- Start Post Image -->
+						<a href="blog-details.html"><img src="{% static 'images/06-md.jpg' %}" class="entry-img overflow-hidden h-100 bg-light" alt=""></a>
+						<!-- /.End Post Image -->
+						<div class="entry-content-caption h-100 overflow-hidden p-4 position-absolute start-0 text-white top-0 w-100">
+							<!-- Start Description -->
+							<!-- /.End Description -->
+							<!-- Start Post Date --><span class="posted-on">
+                                <time class="entry-date published" datetime="2016-09-09T10:06:40+00:00"></time>
+                            </span>
+							<!-- /.End Post Date -->
+						</div>
+					</div>
+					<!-- /.End Entry Content -->
+					<!-- Start Entry Header -->
+					<header class="entry-header">
+						<!-- Start Category --><a href="blog-category.html" class="entry-cat mb-1 d-block fw-semibold">Physiotherapist</a>
+						<!-- /.End Category -->
+						<!-- Start Title -->
+						<h3 class="entry-title fs-17 fw-semibold mb-0"><a class="d-block text-dark" href="blog-details.html">Teething troubles? Schedule a dental
+                                checkup</a></h3>
+						<!-- /.End Title -->
+					</header>
+					<!-- /.End Entry Header -->
+				</article>
+				<!-- /.End Blog Article -->
+				<!-- Start Blog Article -->
+				<article class="thumb-post" data-aos="fade" data-aos-delay="600">
+					<!-- Start Entry Content -->
+					<div class="entry-content mb-3 overflow-hidden position-relative rounded">
+						<!-- Start Post Image -->
+						<a href="blog-details.html"><img src="{% static 'images/05-md.jpg' %}" class="entry-img overflow-hidden h-100 bg-light" alt=""></a>
+						<!-- /.End Post Image -->
+						<div class="entry-content-caption h-100 overflow-hidden p-4 position-absolute start-0 text-white top-0 w-100">
+							<!-- Start Description -->
+							<!-- /.End Description -->
+							<!-- Start Post Date --><span class="posted-on">
+                                <time class="entry-date published" datetime="2016-09-09T10:06:40+00:00"></time>
+                            </span>
+							<!-- /.End Post Date -->
+						</div>
+					</div>
+					<!-- /.End Entry Content -->
+					<!-- Start Entry Header -->
+					<header class="entry-header">
+						<!-- Start Category --><a href="blog-category.html" class="entry-cat mb-1 d-block fw-semibold">General surgeon</a>
+						<!-- /.End Category -->
+						<!-- Start Title -->
+						<h3 class="entry-title fs-17 fw-semibold mb-0"><a class="d-block text-dark" href="blog-details.html">Teething troubles? Schedule a dental
+                                checkup</a></h3>
+						<!-- /.End Title -->
+					</header>
+					<!-- /.End Entry Header -->
+				</article>
+				<!-- /.End Blog Article -->
+				<!-- Start Blog Article -->
+				<article class="thumb-post" data-aos="fade" data-aos-delay="700">
+					<!-- Start Entry Content -->
+					<div class="entry-content mb-3 overflow-hidden position-relative rounded">
+						<!-- Start Post Image -->
+						<a href="blog-details.html"><img src="{% static 'images/07-md.jpg' %}" class="entry-img overflow-hidden h-100 bg-light" alt=""></a>
+						<!-- /.End Post Image -->
+						<div class="entry-content-caption h-100 overflow-hidden p-4 position-absolute start-0 text-white top-0 w-100">
+							<!-- Start Description -->
+							<!-- /.End Description -->
+							<!-- Start Post Date --><span class="posted-on">
+                                <time class="entry-date published" datetime="2016-09-09T10:06:40+00:00"></time>
+                            </span>
+							<!-- /.End Post Date -->
+						</div>
+					</div>
+					<!-- /.End Entry Content -->
+					<!-- Start Entry Header -->
+					<header class="entry-header">
+						<!-- Start Category --><a href="blog-category.html" class="entry-cat mb-1 d-block fw-semibold">Orthopedist</a>
+						<!-- /.End Category -->
+						<!-- Start Title -->
+						<h3 class="entry-title fs-17 fw-semibold mb-0"><a class="d-block text-dark" href="blog-details.html">Teething troubles? Schedule a dental
+                                checkup</a></h3>
+						<!-- /.End Title -->
+					</header>
+					<!-- /.End Entry Header -->
+				</article>
+				<!-- /.End Blog Article -->
+			</div>
+		</div>
+	</div>
+{% endblock %}

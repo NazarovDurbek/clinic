@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+{% load static %}
+{% load apptags %}
+	<!-- /.End of navbar -->
+{% block content %}
+	<div class="breadcrumb-wrap">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col">
+					<!-- Start Breadcrumbs -->
+
+					<!-- End Breadcrumbs -->
+				</div>
+				<div class="col-auto d-lg-none">
+					<!-- Start Filters Button For Mobile -->
+					<button type="button" class="btn btn-light btn-sm btn-offcanvas__filters"> <i class="fa-solid fa-sliders fs-16"></i> </button>
+					<!-- Start Filters Button For Mobile -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Start Offcanvas For Filters -->
+	<div class="offcanvas-filters"> <a href="#" class="offcanvas-close align-items-center d-flex end-0 filters-close fs-21 justify-content-center position-absolute text-dark text-decoration-none top-0"><i class="fa-solid fa-xmark"></i></a>
+		<!-- Start Sidebar filters -->
+		<div class="sidebar-filters">
+			<div class="mb-3">
+				<div class="mb-3 d-flex justify-content-between">
+					<h4 class="fs-16 fw-semibold mb-0">Магазин по категориям</h4> <a href="#" class="fs-12 fw-medium reset text-decoration-none text-uppercase">Сброс</a> </div>
+				<!-- Start Form Check -->
+				{% get_product_categories as categories %}
+				
+				{% for category in categories %}
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="checkbox" value="{{category.id}}" id="cat{{category.id}}">
+					<label class="form-check-label" for="cat1">{{category.name}} </label>
+				</div>
+				<!-- End Form Check -->
+				{% endfor %}
+				<!-- End Form Check -->
+			</div>
+
+			<div class="mb-3">
+				<div class="mb-3 d-flex justify-content-between align-items-end">
+					<h4 class="fs-16 fw-semibold mb-0">Сортировать по</h4> <a href="#" class="fs-12 fw-medium reset text-decoration-none text-uppercase">Сброс</a> </div>
+				<!-- Start Form Check -->
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="sort1" checked="">
+					<label class="form-check-label" for="sort1"> Популярность </label>
+				</div>
+				<!-- End Form Check -->
+				<!-- Start Form Check -->
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="sort2">
+					<label class="form-check-label" for="sort2"> Самый новый первый </label>
+				</div>
+				<!-- End Form Check -->
+				<!-- Start Form Check -->
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="sort3">
+					<label class="form-check-label" for="sort3"> Цена (высокая - низкая) </label>
+				</div>
+				<!-- End Form Check -->
+				<!-- Start Form Check -->
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="sort4">
+					<label class="form-check-label" for="sort4"> Цена (низкая - высокая) </label>
+				</div>
+				<!-- End Form Check -->
+				<!-- Start Form Check -->
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="sort5">
+					<label class="form-check-label" for="sort5"> Лучшие продавцы</label>
+				</div>
+				<!-- End Form Check -->
+			</div>
+			<hr>
+			<div class="mb-3">
+				<div class="mb-3 d-flex justify-content-between align-items-end">
+					<h4 class="fs-16 fw-semibold mb-0">Марка</h4> <a href="#" class="fs-12 fw-medium reset text-decoration-none text-uppercase">Сброс</a> </div>
+				<!-- Start Form Check -->
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="checkbox" value="" id="brand1">
+					<label class="form-check-label" for="brand1"> Квадратные фармацевтические препараты<span class="count ms-1">(28)</span> </label>
+				</div>
+				<!-- End Form Check -->
+				<!-- Start Form Check -->
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="checkbox" value="" id="brand2" checked="">
+					<label class="form-check-label" for="brand2"> Фармацевтическая компания "Инцепта"<span class="count ms-1">(08)</span> </label>
+				</div>
+				<!-- End Form Check -->
+				<!-- Start Form Check -->
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="checkbox" value="" id="brand3">
+					<label class="form-check-label" for="brand3"> Фармацевтическая компания "Бексимко"<span class="count ms-1">(15)</span> </label>
+				</div>
+				<!-- End Form Check -->
+				<!-- Start Form Check -->
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="checkbox" value="" id="brand4">
+					<label class="form-check-label" for="brand4"> Фармацевтический препарат Опсонин<span class="count ms-1">(44)</span> </label>
+				</div>
+				<!-- End Form Check -->
+				<!-- Start Form Check -->
+				<div class="form-check mb-0">
+					<input class="form-check-input" type="checkbox" value="" id="brand5">
+					<label class="form-check-label" for="brand5"> Рената Лимитед<span class="count ms-1">(53)</span> </label>
+				</div>
+				<!-- End Form Check -->
+			</div>
+
+		</div>
+		<!-- End Sidebar filters -->
+	</div>
+	<!-- Start Offcanvas For Filters -->
+	<!-- Start layer -->
+	<div class="h-100 layer position-fixed start-0 top-0 w-100"></div>
+	<!-- End layer -->
+	<div class="py-5">
+		<div class="container py-3">
+			<div class="row">
+				<div class="col-lg-3 mb-3 pe-xl-5 d-none d-lg-block sidebar">
+					<!-- Start Sidebar filters -->
+					<div class="sidebar-filters">
+						<form method="get">
+						<div class="mb-3">
+							<div class="mb-3 d-flex justify-content-between">
+								<h4 class="fs-16 fw-semibold mb-0">Магазин по категориям</h4> <a href="#" class="fs-12 fw-medium reset text-decoration-none text-uppercase">Сброс</a> </div>
+							<!-- Start Form Check -->
+							{% get_product_categories as categories %}
+				
+							{% for category in categories %}
+							<div class="form-check mb-1">
+								<input class="form-check-input" name="selected_categories" type="checkbox" value="{{category.name}}" id="check{{category.id}}">
+								<label class="form-check-label" for="check2">{{category.name}} </label>
+							</div>
+							<!-- End Form Check -->
+							{% endfor %}
+							<!-- End Form Check -->
+							<!-- Start Form Check -->
+						<!-- End Form Check -->
+						<input type="submit">
+						</div>
+
+					</form>
+
+					</div>
+					<!-- End Sidebar filters -->
+				</div>
+				<div class="col-lg-9 content">
+					<!-- Start Filter Top -->
+					<div class="align-items-center d-flex filter-row flex-wrap justify-content-between">
+						<div class="filter-title">
+							<h1 class="fs-21 mb-0 d-inline-block">Просматривайте лекарства товары для здоровья</h1></div>
+						<ul class="list-inline mt-2 mt-xl-0 mb-0">
+							<li class="list-inline-item">
+								<!-- Start Form Select -->
+								<select class="form-select form-select-sm">
+									<option value="">Сортировать по</option>
+									<option value="mostRecent" selected="">Самый последний</option>
+									<option value="newest">Самый новый первый</option>
+									<option value="priceHighLow">Цена (высокая - низкая)</option>
+									<option value="priceLowHigh">Цена (низкая - высокая)</option>
+								</select>
+								<!-- Start Form Select -->
+							</li>
+							<li class="list-inline-item">
+								<!-- Start Form Select -->
+								<select class="form-select form-select-sm">
+									<option value="alphabeticalOrderSelect1" selected="">От А до Я</option>
+									<option value="alphabeticalOrderSelect2">От Я до А</option>
+								</select>
+								<!-- End Form Select -->
+							</li>
+						</ul>
+					</div>
+					<!-- End Filter Top -->
+					<!-- Start Filter Summary -->
+					<div class="align-items-center d-flex filter-summary flex-wrap list-unstyled mb-4">
+						<!-- Start Filter Summary Item -->
+
+						<!-- End Filter Summary Item -->
+						<div class="filter-summary__item d-inline-flex  align-items-center position-relative bg-white border text-dark fs-13 rounded text-capitalize px-2 py-1 mt-2 me-2"> 
+							<label class="filter-summary__remove ms-1">
+								<input type="checkbox" value="Moda Rapido" data-group="Brand"><span class="sprites-remove"></span></label>
+						</div>
+						<!-- End Filter Summary Item -->
+						<!-- Start Filter Summary Item -->
+
+					</div>
+					<!-- End Filter Summary -->
+					<div class="row g-3">
+						{% for product in products %}
+						<div class="col-6 col-sm-4 col-xl-3">
+							<!-- Start Product Card -->
+							<div class="bg-grey border-0 card card-body product-card">
+								<!-- Start Image -->
+								<a href="{{product.get_absolute_url}}" target="_blank" class="d-block overflow-hidden product-img__link"> <img src="{{ product.get_first_photo }}" class="img-fluid product-img" alt=""> </a>
+								<!-- End Image -->
+								<!-- Start heading -->
+								<h3 class="fs-15 fw-semibold mt-2 overflow-hidden product-name">
+                  <a href="{{product.get_absolute_url}}" target="_blank" class="text-black text-decoration-none">{{ product.name }}</a>
+                </h3>
+								<!-- End heading -->
+								<!-- Start Rating -->
+								<!-- End Rating -->
+								<!-- Start Price -->
+								<div class="align-items-center d-flex flex-wrap mb-1 product-price__summary">
+									<!-- Start Product Price -->
+									<div class="h4 fw-bold price text-primary"> <span class="currency__symbol">р</span>{{product.discounted_price}}</div>
+									<!-- /.End Product Price -->
+									<!-- Start Price Discount -->
+									{% if product.discount %}
+									<del class="fs-21 fw-semibold price-discount ps-1 text-black-50">
+										<span class="price">
+											<span class="currency-symbol">р</span>{{product.price}}
+										</span>
+									</del>
+									<!-- /.End Price Discount -->
+									<!-- Start Price Discount Percentage  -->
+									<span class="fs-14 fs-16 fw-semibold ms-1 sale text-danger">(-{{product.discount}}%)</span>
+									<!-- End Price Discount Percentage  -->
+									{% endif %}
+								</div>
+								<!-- End Price -->
+							</div>
+							<!-- End Product Card -->
+						</div>
+						{% endfor %}
+						
+					</div>
+					<!-- Start Pagination-->
+					{% include "app/includes/paginator_product.html" %}
+					<!-- End Pagination-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Start Footer -->
+{% endblock %}

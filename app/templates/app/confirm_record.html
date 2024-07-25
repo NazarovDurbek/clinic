@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+	<!-- /.End of navbar -->
+{% block content %}
+	<div class="py-5">
+		<div class="container py-3">
+			<div class="row justify-content-center">
+				<div class="col-md-8 col-lg-6 text-center">
+					<!-- <i class="fa-solid fa-circle-check text-success fa-5x mb-4"></i> --><img src="{% static 'images/completing.svg' %}" alt="" class="img-fluid w-50 mb-4">
+					<div class="mb-5">
+						<h2>Вы успешно записались к врачу!</h2>
+					</div>
+					<a href="{% url 'users:profile' %}" type="button" class="btn btn-primary btn-lg">Посмотреть запись<i class="fa-arrow-right fa-solid fs-14 ms-2"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
